@@ -1,0 +1,112 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    
+    <title>e-shoes</title>
+    <script src="/public/js/form.js"></script>
+  </head>
+  <body>
+
+    
+<section class="vh-100" style="background-color:">
+  <div class="container py-5 h-100">
+    <div class="row d-flex justify-content-center align-items-center h-100">
+      <div class="col col-xl-10">
+        <div class="card" style="border-radius: 1rem;">
+          <div class="row g-0">
+            <div class="col-md-6 col-lg-5 d-none d-md-block mt-5 pl-5 pt-5 ">
+              <img src="https://tse3.mm.bing.net/th?id=OIP.WXhrl_xhJ8OWZA4r62tAsQHaE8&pid=Api&P=0"
+                alt="login form" class="img-fluid bg-dark" style="border-radius: 1rem 0 0 1rem;" />
+            </div>
+            <div class="col-md-6 col-lg-7 d-flex align-items-center">
+              <div class="card-body p-4 p-lg-5 text-black">
+
+                <form method="post" action="/userlogin" id="form" onsubmit="return " class="form-group"> 
+
+                  <div class="d-flex align-items-center mb-3 pb-1 ">
+                    <i class="fas fa-cubes fa-2x me-3" style="color: #ffffff;"></i>
+                    <span class="h1 fw-bold mb-0"><span class="h1 text-uppercase text-white bg-dark px-2">E-</span>
+                    <span class="h1 text-uppercase text-dark bg-warning px-2 ml-n1">SHOES</span></span>
+                  </div>
+
+                  <h5 class="fw-normal mb-3 pb-3" style="letter-spacing: 1px;">Login into your account</h5>
+
+                  <div class="form-outline mb-4">
+                     <label class="form-label" for="form2Example17">Email address</label>
+                    <input type="email" id="Email" name="Email" class="form-control form-control-lg" required ><span id="usernameError" class="text-danger"></span>
+                   
+                    
+                  </div>
+
+                  <div class="form-outline mb-4">
+                        <label class="form-label" for="form2Example27">Password</label >
+                    <input type="password" id="Password" name="Password" class="form-control form-control-lg" required />
+                
+                  </div>
+                  <div class="mt-2">
+                    {{#if loginErr}}
+                    <small  class="error text-danger font-weight-bold">
+                      {{loginErr}}
+                    </small>
+                    
+                    {{/if}}
+
+                  </div>
+
+                  <div class="pt-1 mb-4">
+                    
+                    <button class="btn btn-dark btn-lg btn-block" type="submit">Login</button>
+                  </div><hr>
+
+                  <a class="small text-muted" href="#!">Forgot password?</a>
+                  <p class="mb-5 pb-lg-2 " style="color: #393f81;">Don't have an account? <a href="/usersignup"
+                      style="color: #03109b;"><span class="font-weight-bold">Register here</span></a></p>
+                  <a href="#!" class="small text-muted">Terms of use.</a>
+                  <a href="#!" class="small text-muted">Privacy policy</a>
+                </form>
+
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+    
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.7/dist/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+  </body>
+  <script>
+    function loginValidation(){
+      let flag=0;
+      let username=document.getElementById('Email').value.trim()
+      let password=document.getElementById('Password').value.trim()
+      if(username=""){
+        document.getElementById('usernameError').innerHTML="Username required"
+        flag=1;
+
+      }else if (username.length <4){
+         document.getElementById('usernameError').innerHTML="enter a valid username"
+        flag=1;
+      }else{
+        document.getElementById('usernameError').innerHTML=""
+      }
+      if(flag==1){
+        return false
+
+      }
+    }
+  </script>
+</html>
