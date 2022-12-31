@@ -1,5 +1,5 @@
 const { response } = require("express")
-const { OTP, mailTransporter } = require("../middlewares/otpValidation")
+const mailer=require("../middlewares/otpValidation")
 const productHelper=require("../model/helpers/product-helpers")
 const userHelper=require('../model/helpers/user-helpers')
 
@@ -72,10 +72,10 @@ module.exports={
         let mailDetails={
             from:"suhailth313@gmail.com",
             to:Email,
-            subject:"E-SHOES",
-            html:`<p>YOUR OTP FOR REGISTRATION IN E-SHOES IS ${OTP}<P>`,
+            subject:"E-SHOES otp",
+            html:`<p>YOUR OTP FOR REGISTRATION IN E-SHOES IS ${mailer.OTP}<P>`,
         };
-        mailTransporter.sendMail(mailDetails,function(err,data){
+        mailer.mailTransporter.sendMail(mailDetails,function(err,data){
             if(err){
                 console.log(err);
             }else{
