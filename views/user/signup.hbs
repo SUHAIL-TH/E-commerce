@@ -49,6 +49,9 @@
                 <label for="exampleInputPassword1">Password</label>
                 <input type="password" class="form-control" name="Password" placeholder="Password" ><span id="passwordError" class="text-danger"></span>
             </div>
+            {{#if err_message}}
+                    <p class="error text-danger font-weight-bold">{{err_message}}</p>
+            {{/if}}
 
             <div >
                 
