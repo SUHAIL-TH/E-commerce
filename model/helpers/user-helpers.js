@@ -66,6 +66,13 @@ module.exports={
             resolve(users)
         })
     },
+    updateverified:(userId)=>{
+        return new Promise(async(resolve,reject)=>{
+            db.get().collection(collection.USER_COLLECTION).updateOne({_id:userId},{$set:{verified:1}}).then((response) => {
+                resolve(response);
+              });
+        })
+    }
     
     
 }

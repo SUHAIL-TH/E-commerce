@@ -29,12 +29,12 @@ module.exports={
                 }else{
                    
                     
-                    res.render('admin/login',{loginErr:'invalid username '})
+                    res.render('admin/login',{loginErr:'invalid username OR password '})
                     
 
                 }
             }else{
-                res.render('admin/login',{loginErr:'invalid username '
+                res.render('admin/login',{loginErr:'invalid email'
             })
                
                
@@ -153,6 +153,27 @@ module.exports={
     adminlogout:(req,res)=>{
      
         res.redirect("/admin")
+    },
+    editproduct:async(req,res)=>{
+        let id=req.params.id
+        
+        let product=await productHelper.getproductdetails(id)
+        console.log(product);
+        res.render("admin/editproduct",{admin:true,product,id})
+    },
+    addeditproduct:(req,res)=>{
+        let id=req.params.id;
+        productHelper.updateproduct(req.params.id,req.body).then(()=>{
+            res.render("admin/editproduct",{admin:true})
+            if(req.files.Image){
+                let image=req.files.Image
+            
+            
+            image.mv('./public/img/product-images/'+id+'.jpg')
+
+            }
+        })
+
     }
  
     

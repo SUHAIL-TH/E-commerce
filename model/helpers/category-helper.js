@@ -21,7 +21,7 @@ module.exports={
     },
     deletcategory:(catid)=>{
         return new Promise(async(resolve,reject)=>{
-            await db.get().collection(collection .CATEGORY_COLLECTION).deleteOne({_id:ObjectId(catid)}).then((response)=>{
+            await db.get().collection(collection.CATEGORY_COLLECTION).deleteOne({_id:ObjectId(catid)}).then((response)=>{
                 console.log(response );
                 resolve(response)
 

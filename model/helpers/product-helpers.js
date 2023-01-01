@@ -33,5 +33,28 @@ module.exports={
 
             })
         })
+    }, 
+    getproductdetails:(id)=>{
+        return new Promise(async(resolve,reject)=>{
+            await db.get().collection(collection.PRODUCT_COLLECTION).findOne({_id:ObjectId(id)}).then((product,id)=>{
+                resolve(product,id);
+            })
+        })
+    },
+    updateproduct:(proId,prodetails)=>{
+        return new Promise((resolve,reject)=>{
+            db.get().collection(collection.PRODUCT_COLLECTION)
+            .updateOne({_id:ObjectId(proId)},{$set:{
+                product_name:prodetails.product_name,
+                Category:prodetails.Category,
+                Rate:prodetails.Rate,
+                Discription:prodetails.Discription
+
+
+            }}
+            ).then((response)=>{
+                resolve()
+            })
+        })
     }
 }
