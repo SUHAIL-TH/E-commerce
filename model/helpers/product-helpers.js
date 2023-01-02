@@ -56,5 +56,12 @@ module.exports={
                 resolve()
             })
         })
+    },
+    viewproduct:async(id)=>{
+        return new Promise(async(resolve,reject)=>{
+            await db.get().collection(collection.PRODUCT_COLLECTION).findOne({_id:ObjectId(id)}).then((product,id)=>{
+                resolve(product,id)
+            })
+        })
     }
 }

@@ -3,7 +3,9 @@ const mailer=require("../middlewares/otpValidation")
 const productHelper=require("../model/helpers/product-helpers")
 const userHelper=require('../model/helpers/user-helpers')
 var db=require('../confi/connection');
-var collection=require('../confi/collections')
+var collection=require('../confi/collections');
+const { ObjectId } = require("mongodb");
+
 
 
 
@@ -93,7 +95,10 @@ module.exports={
                     console.log("email sent successfull");
                     userHelper.doSignup(verified,Name,Email,Place,Password,state).then((response)=>{
                         console.log(response)
-                        if(response){}
+                        // if(response){}
+                        req.session.logedIn=true;
+                        req.session.user=response;
+
                         let userId=response.insertedId
                         // console.log(userId);
                         res.render('user/otp',{userId})
@@ -136,6 +141,7 @@ module.exports={
             if(response.status){
                 req.session.logedIn=true;
                 req.session.user=response.user;
+                
                 res.redirect('/')
 
             }else{
@@ -160,8 +166,8 @@ module.exports={
        
     },
 
-    getuserlogout:(req,res)=>{
-         req.session.destroy()
+    getuserlogout:async(req,res)=>{
+        await req.session.destroy()
        
         res.redirect('/')
         
@@ -170,7 +176,7 @@ module.exports={
         res.redirect('/')
     },
     getcontact:(req,res)=>{
-        let user=req.session.user
+        let user= req.session.user
         if(user){
             customer=true
             res.render('user/contact',{user:true,customer,user})
@@ -180,6 +186,28 @@ module.exports={
         }
        
     },
+    productview:async(req,res)=>{
+        let user= req.session.user
+        let id=req.params.id
+        
+       
+
+        let product=await productHelper.viewproduct(id)
+        
+        
+        
+        if(user){
+            customer=true
+            res.render('user/productview',{user:true,customer,user,product,id})
+        }else{
+            
+            res.render('user/productview',{user:true,product,id})
+
+        }
+       
+
+        
+    }
        
     
 
