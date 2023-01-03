@@ -2,6 +2,7 @@ const { response } = require("express")
 const mailer=require("../middlewares/otpValidation")
 const productHelper=require("../model/helpers/product-helpers")
 const userHelper=require('../model/helpers/user-helpers')
+const cartHelper=require("../model/helpers/cartHelper")
 var db=require('../confi/connection');
 var collection=require('../confi/collections');
 const { ObjectId } = require("mongodb");
@@ -12,27 +13,24 @@ const { ObjectId } = require("mongodb");
 
 
 module.exports={
-    getHome:(req,res)=>{
+    getHome:async(req,res)=>{
         let user=req.session.user
-        
+        let cartcount=0
+        if(user){
+            cartcount=await cartHelper.getcartcount(req.session.user._id)
+        }
         productHelper.getAllproducts().then((product)=>{
             
 
             if(user){
                 customer=true;
-                
-                res.render('user/index',{product,user:true,customer,user})
+                res.render('user/index',{product,user:true,customer,user,cartcount})
                 
 
-            }else {
-                 
-                res.render('user/index',{product,user:true})
-    
-
+            }else { 
+                res.render('user/index',{product,user:true,cartcount})
             }
-          
-           
-
+        
         })
        
     },
@@ -63,7 +61,7 @@ module.exports={
     //     userHelper.doSignup(req.body).then((response)=>{
     //         console.log(response)
     //         if(response){}
-    //         res.render('user/otp')
+    //         res.render('user/otp') 
     //     })
 
     // },
@@ -122,7 +120,8 @@ module.exports={
                        //evide ee bug fix akkan und*******************************************************
         //    console.log(userId);
         //     userHelper.updateverified(userId).then((response)=>{
-                res.redirect("/userlogin")
+                // res.redirect("/userlogin")
+                res.render("user/login")
 
             // })
             
@@ -136,6 +135,7 @@ module.exports={
     },
 
     postlogin:(req,res)=>{
+        
         
         userHelper.doLogin(req.body).then((response=>{
             if(response.status){
@@ -154,17 +154,7 @@ module.exports={
 
     },
 
-    getusercart:(req,res)=>{
-        let user=req.session.user
-        if(user){
-            customer=true
-            res.render('user/cart',{user:true,customer,user})
-        }else{
-            res.render('user/cart',{user:true})
-
-        }
-       
-    },
+   
 
     getuserlogout:async(req,res)=>{
         await req.session.destroy()
@@ -189,6 +179,9 @@ module.exports={
     productview:async(req,res)=>{
         let user= req.session.user
         let id=req.params.id
+       
+        
+        
         
        
 
@@ -198,12 +191,59 @@ module.exports={
         
         if(user){
             customer=true
-            res.render('user/productview',{user:true,customer,user,product,id})
+            let userid=req.session.user._id
+            console.log(userid);
+            res.render('user/productview',{user:true,customer,user,product,id,userid})
         }else{
             
             res.render('user/productview',{user:true,product,id})
 
         }
+        
+
+       
+
+        
+    },
+    getusercart:async(req,res)=>{
+        let user=req.session.user
+       
+        
+       
+        if(user){
+
+            customer=true
+            let  products=await cartHelper.getCartproducts(req.session.user._id)
+            console.log(products);
+            
+            
+            res.render('user/cart',{user:true,customer,user,products})
+        }else{
+            res.render('user/cart',{user:true,})
+
+        }
+       
+    },
+    addtocart:(req,res)=>{
+
+    //    user=req.session.user._id
+    //     console.log(user);
+    //     console.log(req.params.id);
+    let user=req.session.user
+   
+    if(user){
+        customer=true
+        cartHelper.addtocart(req.params.id,req.session.user._id).then(()=>{
+            
+            res.redirect('/usercart')
+        
+        })
+       
+    }else{
+        res.redirect('/usercart',{user:true})
+
+    }
+       
        
 
         
