@@ -15,6 +15,7 @@ const { ObjectId } = require("mongodb");
 module.exports={
     getHome:async(req,res)=>{
         let user=req.session.user
+        
         let cartcount=0
         if(user){
             cartcount=await cartHelper.getcartcount(req.session.user._id)
@@ -49,6 +50,10 @@ module.exports={
             
         }
        
+        
+    },
+    guestuser:(req,res)=>{
+        res.render('user/login')
         
     },
 
@@ -234,8 +239,9 @@ module.exports={
     if(user){
         customer=true
         cartHelper.addtocart(req.params.id,req.session.user._id).then(()=>{
+            res.json({status:true})
             
-            res.redirect('/usercart')
+            // res.redirect('/usercart')
         
         })
        

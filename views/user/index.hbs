@@ -160,9 +160,15 @@
                     <div class="product-img position-relative overflow-hidden">
                         <img class="img-fluid w-100" style="width:50px; height: 315px;" src="/public/img/product-images/{{this._id}}.jpg" alt="product image">
                         <div class="product-action">
-                            <a class="btn btn-outline-dark btn-square" href="/addtocart/{{this._id}}"><i class="fa fa-shopping-cart"></i></a>
-                             {{!-- <a class="btn btn-outline-dark btn-square" onclick="addTocart({{this._id}})"><i class="fa fa-shopping-cart"></i></a> --}}
+                            {{!-- <a class="btn btn-outline-dark btn-square" href="/addtocart/{{this._id}}"><i class="fa fa-shopping-cart"></i></a> --}}
+                            
+                             <a class="btn btn-outline-dark btn-square" onclick="addTocart('{{this._id}}')"><i class="fa fa-shopping-cart"></i></a>
                             <a class="btn btn-outline-dark btn-square" href="/"><i class="far fa-heart"></i></a>
+                            
+                            
+                             {{!-- <a class="btn btn-outline-dark btn-square" href="/guestuser"><i class="fa fa-shopping-cart"></i></a> --}}
+
+                        
                             <a class="btn btn-outline-dark btn-square" href="/productview/{{this._id}}"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-eye-fill" viewBox="0 0 16 16">
   <path d="M10.5 8a2.5 2.5 0 1 1-5 0 2.5 2.5 0 0 1 5 0z"/>
   <path d="M0 8s3-5.5 8-5.5S16 8 16 8s-3 5.5-8 5.5S0 8 0 8zm8 3.5a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7z"/>
@@ -270,18 +276,11 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.bundle.min.js"></script>
   
     <!-- Template Javascript -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+
     <script src="js/main.js"></script>
-    <script>
-        function addTocart(proId){
-            $.ajax({
-                url:'/addtocart/'+proId
-                method:'get',
-                success:(Response)=>{
-                    alert(response)
-                }
-            })
-        }
-    </script>
+    <script src="/public/js/ajax.js"></script>
+    
 
     
 

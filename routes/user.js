@@ -21,6 +21,7 @@ userrouter.get('/home',userController.getuserhome)
 userrouter.get('/contact',userController.getcontact)
 userrouter.get("/productview/:id",userController.productview)
 userrouter.get("/addtocart/:id",verifyLogin.verifyLoginUser, userController.addtocart)
+userrouter.get('/guestuser',userController.guestuser)
 
 
 
