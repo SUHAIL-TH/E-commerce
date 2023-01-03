@@ -2,8 +2,10 @@ const express = require('express');
 const adminrouter = express.Router();
 const adminController = require('../controllers/adminController')
 const producteHlper=require("../model/helpers/product-helpers")
+const verifyLogin=require("../middlewares/sessions")
 adminrouter.use(express.urlencoded({ extended: false }));
-adminrouter.use(express.json());
+adminrouter.use(express.json())
+
 
 
 adminrouter.get('/',adminController.getlogin)
@@ -17,6 +19,8 @@ adminrouter.get('/addproduct',adminController.getaddproduct)
 adminrouter.post('/addproduct',adminController.postaddproduct)
 adminrouter.get('/deleteproduct/:id',adminController.deleteproduct)
 adminrouter.get('/viewproduct',adminController.getviewproduct)
+adminrouter.get("/editproduct/:id",adminController.editproduct)
+adminrouter.post('/editproduct/:id',adminController.addeditproduct)
 
 // **********************************usermangement*****************************
 adminrouter.get('/viewusers',adminController.getviewusers)

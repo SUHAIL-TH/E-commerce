@@ -69,7 +69,14 @@
 						</p>
 						<div class="single-product-form">
 							<div>
-							<a class="btn btn-outline-dark btn-square" href="/usercart"><i class="fa fa-shopping-cart"></i></a>
+								
+							{{!-- <a class="btn btn-outline-dark btn-square" href="/usercart"><i class="fa fa-shopping-cart"></i></a> --}}
+							{{#if user}}
+							<a class="btn btn-outline-dark btn-square" href="/addtocart/{{id}}"><i class="fa fa-shopping-cart"></i></a>
+							{{else}}
+							<a class="btn btn-outline-dark btn-square" href="/usercart "><i class="fa fa-shopping-cart"></i></a>
+							{{/if}}
+
 								
 							</div>
 							<div class="mt-2">

@@ -22,7 +22,8 @@ module.exports={
            
             if (admin){
                 if(email==admin.email && password==admin.password){
-                    req.session.admin=req.body.email;
+                    req.session.logedIn=true;
+                    req.session.admin=admin;
                     console.log("admin login");
                     res.render("admin/home" ,{admin:true,admin})
 
@@ -30,6 +31,7 @@ module.exports={
                    
                     
                     res.render('admin/login',{loginErr:'invalid username OR password '})
+                    console.log('Admin invalid username or password');
                     
 
                 }
@@ -164,7 +166,7 @@ module.exports={
     addeditproduct:(req,res)=>{
         let id=req.params.id;
         productHelper.updateproduct(req.params.id,req.body).then(()=>{
-            res.render("admin/editproduct",{admin:true})
+            res.redirect("/admin/viewproduct")
             if(req.files.Image){
                 let image=req.files.Image
             
