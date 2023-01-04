@@ -273,9 +273,9 @@ module.exports={
         })
     },
     placeorder:async(req,res)=>{
-        console.log(req.session.user._id);
+        
         let  user=req.session.user
-      let total=await cartHelper.getTotalamount(req.session.user._id)
+       let total=await cartHelper.getTotalamount(req.session.user._id)
      
         if(user){
             customer=true
@@ -283,6 +283,18 @@ module.exports={
            
         }
         
+    },
+    placeorderpost:async(req,res)=>{
+        console.log(req.body.userId);
+        let products=await cartHelper.getcartproductlist(req.body.userId)
+         let totalPrice=await cartHelper.getTotalamount(req.body.userId)
+        cartHelper.placeOrder(req.body,products,totalPrice).then((response)=>{
+            res.json({status:true})
+
+        })
+        console.log(req.body);
+       
+    
     }
     
        

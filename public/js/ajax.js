@@ -64,3 +64,6 @@ function removeProduct(cartId,proId) {
         }
     })
 }
+
+
+ 

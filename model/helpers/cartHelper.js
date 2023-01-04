@@ -3,6 +3,7 @@ var collection = require('../../confi/collections');
 const { resolve } = require('path');
 const { ObjectId } = require('mongodb');
 const { response } = require('express');
+const { LOADIPHLPAPI } = require('dns');
 
 module.exports = {
     addtocart: (proId, userId) => {
@@ -269,6 +270,42 @@ module.exports = {
 
         })
 
+    },
+    placeOrder:(order,products,total)=>{
+        return new Promise((resolve,reject)=>{
+
+            console.log(order,products,total);
+            let status=order['payment-method']==='COD'?'placed':'pending'
+            let orderObj={
+                deliveryDetails:{
+                    name:order.name,
+                    address:order.address,
+                    mobile:order.mobile,
+                    place:order.place,
+                    pincode:order.pincode,
+                    total:total,
+                    date:new Date()
+
+                },
+                userId:ObjectId(order.userId),
+                paymentMethode:order['payment-method'],
+                products:products,
+                status:status
+            }
+            db.get().collection(collection.ORDER_COLLECTION).insertOne(orderObj).then((response)=>{
+                // db.get().collection(collection.CART_COLLECTION).deleteOne({user:ObjectId(order.userId)})
+                resolve()
+            })
+
+        })
+    },
+    getcartproductlist:(userId)=>{
+        return new Promise(async(resolve,reject)=>{
+            let cart=await db.get().collection(collection.CART_COLLECTION).findOne({user:ObjectId(userId)})
+           
+            resolve(cart.products)
+
+        })
     }
 
 
