@@ -18,7 +18,7 @@ function addTocart(proId){
 
 
 
-function changeQuantitty(cartId, proId, count) {
+function changeQuantitty(cartId, proId,userId, count) {
     let quantity=parseInt(document.getElementById(proId).innerHTML)
     count=parseInt(count)
 
@@ -26,6 +26,7 @@ function changeQuantitty(cartId, proId, count) {
     $.ajax({
         url: '/changeproductquantity',
         data: {
+            user:userId,
             cart: cartId,
             product: proId,
             count: count,
@@ -38,6 +39,8 @@ function changeQuantitty(cartId, proId, count) {
                 location.reload()
             }else{
                 document.getElementById(proId).innerHTML=quantity+count
+                document.getElementById('total').innerHTML=response.total
+                 
             }
             
         }

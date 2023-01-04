@@ -213,18 +213,16 @@ module.exports={
         
     },
     getusercart:async(req,res)=>{
-        let user=req.session.user
-       
-        
-       
+        let user=req.session.user 
         if(user){
 
             customer=true
+            let totalValue=await cartHelper.getTotalamount(req.session.user._id)
             let  products=await cartHelper.getCartproducts(req.session.user._id)
             console.log(products);
             
             
-            res.render('user/cart',{user:true,customer,user,products})
+            res.render('user/cart',{user:true,customer,user,products,totalValue})
         }else{
             res.render('user/cart',{user:true,})
 
@@ -258,10 +256,10 @@ module.exports={
     },
     changeproductquantity:(req,res,next)=>{
         console.log(req.body);
-        
-        
-        
-        cartHelper.changecartproductquantity(req.body).then((response)=>{
+       
+        cartHelper.changecartproductquantity(req.body).then(async(response)=>{
+             response.total=await cartHelper.getTotalamount(req.body.user)
+
             res.json(response)
 
         })
@@ -273,6 +271,18 @@ module.exports={
             res.json(response)
 
         })
+    },
+    placeorder:async(req,res)=>{
+        console.log(req.session.user._id);
+        let  user=req.session.user
+      let total=await cartHelper.getTotalamount(req.session.user._id)
+     
+        if(user){
+            customer=true
+            res.render("user/checkout",{user:true, customer,user,total})
+           
+        }
+        
     }
     
        

@@ -39,6 +39,8 @@ userrouter.post('/changeproductquantity',userController.changeproductquantity)
 
 userrouter.post('/removecartproduct',userController.removecartproduct)
 
+userrouter.get("/placeorder",verifyLogin.verifyLoginUser,userController.placeorder)
+
 
 
  
