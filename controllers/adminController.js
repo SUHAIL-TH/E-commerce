@@ -163,6 +163,7 @@ module.exports={
         console.log(product);
         res.render("admin/editproduct",{admin:true,product,id})
     },
+    
     addeditproduct:(req,res)=>{
         let id=req.params.id;
         productHelper.updateproduct(req.params.id,req.body).then(()=>{
