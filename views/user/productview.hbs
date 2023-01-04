@@ -72,7 +72,9 @@
 								
 							{{!-- <a class="btn btn-outline-dark btn-square" href="/usercart"><i class="fa fa-shopping-cart"></i></a> --}}
 							{{#if user}}
-							<a class="btn btn-outline-dark btn-square" href="/addtocart/{{id}}"><i class="fa fa-shopping-cart"></i></a>
+							
+							{{!-- <a class="btn btn-outline-dark btn-square" href="/addtocart/{{id}}"><i class="fa fa-shopping-cart"></i></a> --}}
+							 <a class="btn btn-outline-dark btn-square" onclick="addTocart('{{product._id}}')"><i class="fa fa-shopping-cart"></i></a>
 							{{else}}
 							<a class="btn btn-outline-dark btn-square" href="/usercart "><i class="fa fa-shopping-cart"></i></a>
 							{{/if}}
@@ -115,29 +117,12 @@
 		<!-- end copyright -->
 
 		<!-- jquery -->
-		<script src="/assets/js/jquery-1.11.3.min.js"></script>
-		<!-- bootstrap -->
-		<script src="/assets/bootstrap/js/bootstrap.min.js"></script>
-		<!-- count down -->
-		<script src="/assets/js/jquery.countdown.js"></script>
-		<!-- isotope -->
-		<script src="/assets/js/jquery.isotope-3.0.6.min.js"></script>
-		<!-- waypoints -->
-		<script src="/assets/js/waypoints.js"></script>
-		<!-- owl carousel -->
-		<script src="/assets/js/owl.carousel.min.js"></script>
-		<!-- magnific popup -->
-		<script src="/assets/js/jquery.magnific-popup.min.js"></script>
-		<!-- mean menu -->
-		<script src="/assets/js/jquery.meanmenu.min.js"></script>
-		<!-- sticker js -->
-		<script src="/assets/js/sticker.js"></script>
-		<!-- main js -->
-		<script src="/assets/js/main.js"></script>
-
+		
 		<!-- ajax request -->
-		<script src="/assets/js/ajaxrequests.js"></script>
-		<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+		
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+       <script src="/public/js/ajax.js"></script>
+
 
 		<script>
 
@@ -156,6 +141,9 @@
 		</script>
 		<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.bundle.min.js"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+  <script src="/public/js/ajax.js"></script>
+    
   
     <!-- Template Javascript -->
     <script src="js/main.js"></script>
