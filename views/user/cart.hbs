@@ -1,97 +1,59 @@
-
-
+<section>
     <!-- Cart Start -->
     <div class="container-fluid">
         <div class="row px-xl-5">
             <div class="col-lg-8 table-responsive mb-5">
-                {{!-- <table class="table table-light table-borderless table-hover text-center mb-0">
+
+                <table class="table mt-3">
                     <thead class="thead-dark">
                         <tr>
-                            <th>Name</th>
-                            <th>Item</th>
-                            <th>Price</th>
+
+                            <th scope="col">Name</th>
+                            <th scope="col">Image</th>
+
+                            <th scope="col">₹ price</th>
                             <th>Quantity</th>
-                            <th>Total</th>
-                            <th>Remove</th>
+                            {{!-- <th>Total</th> --}}
+
+
+                            <th scope="col">options</th>
                         </tr>
                     </thead>
-                    <tbody class="align-middle">
-                        {{#each Products}}
+                    <tbody>
+                        {{#each products}}
                         <tr>
-                            <td>{{this.product_name}}</td>
-                            <td class="align-middle"><img src="/public//img/product-images/{{this._id}}.jpg" alt="" style="width: 50px;"> Image</td>
-                            <td class="align-middle">{{this.Rate}}</td>
-                            <td class="align-middle">
-                                <div class="input-group quantity mx-auto" style="width: 100px;">
-                                    <div class="input-group-btn">
-                                        <button class="btn btn-sm btn-primary btn-minus" >
-                                        <i class="fa fa-minus"></i>
-                                        </button>
-                                    </div>
-                                    <input type="text" class="form-control form-control-sm bg-secondary border-0 text-center" value="1">
-                                    <div class="input-group-btn">
-                                        <button class="btn btn-sm btn-primary btn-plus">
-                                            <i class="fa fa-plus"></i>
-                                        </button>
-                                    </div>
-                                </div>
+
+
+                            <td>{{this.product.product_name}}</td>
+                            <td><img style="width:50px; height: 50px;"
+                                    src="/public/img/product-images/{{this.product._id}}.jpg" alt="image of product">
                             </td>
-                            <td class="align-middle">$150</td>
-                            <td class="align-middle"><button class="btn btn-sm btn-danger"><i class="fa fa-times"></i></button></td>
+
+                            <td>{{this.product.Rate}}</td>
+
+                            <td>
+                                <button class="cart-item-count mr-3 btn btn-dark font-weight-bold"
+                                    onclick="changeQuantitty('{{this._id}}','{{this.product._id}}',-1)">-</button><span
+                                    id="{{this.product._id}}">{{this.quantity}}</span><button
+                                    class="cart-item-count ml-3 btn btn-dark font-weight-bold"
+                                    onclick="changeQuantitty('{{this._id}}','{{this.product._id}}',1)">+</button>
+                            </td>
+
+                            {{!-- <td>6000</td> --}}
+
+                            <td><button class="btn btn-danger font-weight-bold"
+                                    onclick="removeProduct('{{this._id}}','{{this.product._id}}')"><i
+                                        class="fa fa-times"></i></button>
+                            </td>
+
+
+
+
                         </tr>
                         {{/each}}
-                       
-                    </tbody>
-                </table> --}}
-                <table class="table mt-3">
-  <thead class="thead-dark">
-    <tr>
-      
-      <th scope="col">Name</th>
-       <th scope="col">Image</th>
-     
-      <th scope="col">₹ price</th>
-       <th>Quantity</th>
-       <th>Total</th>
-    
-     
-      <th scope="col">options</th>
-    </tr>
-  </thead>
-  <tbody>
-    {{#each products}}
-    <tr>
-     
-      <td>{{this.product_name}}</td>
-       <td><img style="width:50px; height: 50px;" src="/public/img/product-images/{{this._id}}.jpg" alt="image of product"></td>
-      
-      <td>{{this.Rate}}</td>
-      <td><div class="input-group quantity mx-auto" style="width: 100px;">
-                                    <div class="input-group-btn">
-                                        <button class="btn btn-sm btn-primary btn-minus" >
-                                        <i class="fa fa-minus"></i>
-                                        </button>
-                                    </div>
-                                    <input type="text" class="form-control form-control-sm bg-secondary border-0 text-center" value="1">
-                                    <div class="input-group-btn">
-                                        <button class="btn btn-sm btn-primary btn-plus">
-                                            <i class="fa fa-plus"></i>
-                                        </button>
-                                    </div>
-                                </div></td>
 
-      <td>6000</td>
-     
-       <td><button class="btn btn-danger font-weight-bold"><i class="fa fa-times"></i></button></td>
-         {{!-- <td class="align-middle"><button class="btn btn-sm btn-danger"><i class="fa fa-times"></i></button></td> --}}
-        
-        
-    
-    </tr>
-    {{/each}}
-    
-  </tbody>
-</table>
+                    </tbody>
+                </table>
             </div>
             <div class="col-lg-4">
                 <form class="mb-30" action="">
@@ -102,7 +64,8 @@
                         </div>
                     </div>
                 </form>
-                <h5 class="section-title position-relative text-uppercase mb-3"><span class="bg-secondary pr-3">Cart Summary</span></h5>
+                <h5 class="section-title position-relative text-uppercase mb-3"><span class="bg-secondary pr-3">Cart
+                        Summary</span></h5>
                 <div class="bg-light p-30 mb-5">
                     <div class="border-bottom pb-2">
                         <div class="d-flex justify-content-between mb-3">
@@ -119,7 +82,8 @@
                             <h5>Total</h5>
                             <h5>$160</h5>
                         </div>
-                        <button class="btn btn-block btn-primary font-weight-bold my-3 py-3">Proceed To Checkout</button>
+                        <button class="btn btn-block btn-primary font-weight-bold my-3 py-3">Proceed To
+                            Checkout</button>
                     </div>
                 </div>
             </div>
@@ -128,8 +92,6 @@
     <!-- Cart End -->
 
 
-    
-
     <!-- Back to Top -->
     <a href="#" class="btn btn-primary back-to-top"><i class="fa fa-angle-double-up"></i></a>
 
@@ -137,6 +99,15 @@
     <!-- JavaScript Libraries -->
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.bundle.min.js"></script>
-  
+
     <!-- Template Javascript -->
     <script src="js/main.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+    
+    <script>
+        
+
+    </script>
+    <script src="/public/js/ajax.js"></script>
+
+</section>

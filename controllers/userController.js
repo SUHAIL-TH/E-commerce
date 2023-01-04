@@ -29,6 +29,7 @@ module.exports={
                 
 
             }else { 
+                
                 res.render('user/index',{product,user:true,cartcount})
             }
         
@@ -118,11 +119,12 @@ module.exports={
 
     },
     postotp:async(req,res)=>{
+        console.log(req.session.user);
         
         console.log(req.body);
         if(mailer.OTP==req.body.otp){
             
-                       //evide ee bug fix akkan und*******************************************************
+                       //evide ee bug fix akkan und verifed one akkanam*******************************************************
         //    console.log(userId);
         //     userHelper.updateverified(userId).then((response)=>{
                 // res.redirect("/userlogin")
@@ -253,7 +255,26 @@ module.exports={
        
 
         
+    },
+    changeproductquantity:(req,res,next)=>{
+        console.log(req.body);
+        
+        
+        
+        cartHelper.changecartproductquantity(req.body).then((response)=>{
+            res.json(response)
+
+        })
+
+    },
+    removecartproduct:(req,res,next)=>{
+        console.log(req.body);
+        cartHelper.removecartproduct(req.body).then((response)=>{
+            res.json(response)
+
+        })
     }
+    
        
     
 
