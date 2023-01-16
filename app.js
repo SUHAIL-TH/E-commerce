@@ -1,11 +1,19 @@
 const express =require('express')
+
 const path=require('path')
+
 const session=require("express-session")
+
 const cookiparser=require('cookie-parser')
+
 var db=require('./confi/connection')
+
 const hbs=require('express-handlebars')
+
 const fileupload=require('express-fileupload')
+
 const userRouter=require('./routes/user')
+
 const adminRouter=require('./routes/admin')
 
 
@@ -19,28 +27,44 @@ app.set('view engine', 'hbs');
 app.engine('hbs',hbs.engine({extname:'hbs',defaultLayout:'layout',layoutsDir:__dirname+'/views/layout',partialsDir:__dirname+'/views/partials'}))
 
 app.use(session({
+
     secret: "thisismysecrctekeyfhrgfgrfrty84fwir767",
+
     saveUninitialized:true,
+
     cookie: { maxAge: 6000000 },
+
     resave: false 
+
 }));
+
 app.use(express.static(__dirname));
+
 app.use("javascript",express.static(path.join(__dirname+"public/js/main.js")));
 
 app.use(express.urlencoded({ extended: false }));
+
 app.use(express.json());
+
 app.use(cookiparser());
+
 app.use(fileupload())
 
 db.connect((err)=>{
+
     if(err) console.log("connection error");
 
     else console.log("database connected ");
 })
+
 app.use('/',userRouter);
+
 app.use('/admin',adminRouter);
+
 app.get('*',(req,res)=>{
+
     res.render('user/404',{admin:false,user:false})
+    
 })
 
 

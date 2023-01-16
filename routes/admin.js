@@ -49,6 +49,13 @@ adminrouter.get("/deletecategory/:id",verifyLogin.verifyLoginAdmin,adminControll
 
 adminrouter.get("/backaddcategory",verifyLogin.verifyLoginAdmin,adminController.backaddcategory)
 
+adminrouter.get('/orderlist',verifyLogin.verifyLoginAdmin,adminController.orderlist)
+
+adminrouter.get('/CancelOrder/:id',verifyLogin.verifyLoginAdmin,adminController.cancelorder)
+
+adminrouter.get('/updateorder/:id',verifyLogin.verifyLoginAdmin,adminController.updateorderstatus)
+
+adminrouter.post('/postorderstatus/:id',verifyLogin.verifyLoginAdmin,adminController.postorderstatus)
 
 
 module.exports = adminrouter;

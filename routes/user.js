@@ -41,6 +41,18 @@ userrouter.post('/removecartproduct',userController.removecartproduct)
 
 userrouter.get("/placeorder",verifyLogin.verifyLoginUser,userController.placeorder)
 
+userrouter.post("/placeorder",verifyLogin.verifyLoginUser,userController.placeorderpost)
+
+userrouter.get('/codorderplacedsuccess',verifyLogin.verifyLoginUser,userController.codorderplacedsuccess)
+
+userrouter.get('/orderlist',verifyLogin.verifyLoginUser,userController.orderlist)
+
+userrouter.get('/view-order-product/:id',verifyLogin.verifyLoginUser,userController.vieworderproduct)
+
+userrouter.get('/aboutus',userController.aboutus)
+
+userrouter.get('/cancelorder/:id',verifyLogin.verifyLoginUser,userController.cancelOrder)
+
 
 
  

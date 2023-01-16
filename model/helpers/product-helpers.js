@@ -36,7 +36,7 @@ module.exports={
     }, 
     getproductdetails:(id)=>{
         return new Promise(async(resolve,reject)=>{
-            await db.get().collection(collection.PRODUCT_COLLECTION).findOne({_id:ObjectId(id)}).then((product,id)=>{
+            await db.get().collection(collection.PRODUCT_COLLECTION).findOne({_id:ObjectId(id)}).then((product,id)=>{ 
                 resolve(product,id);
             })
         })

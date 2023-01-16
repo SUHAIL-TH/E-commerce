@@ -3,6 +3,7 @@ const mailer=require("../middlewares/otpValidation")
 const productHelper=require("../model/helpers/product-helpers")
 const userHelper=require('../model/helpers/user-helpers')
 const cartHelper=require("../model/helpers/cartHelper")
+const orderHelper=require('../model/helpers/orderHelper')
 var db=require('../confi/connection');
 var collection=require('../confi/collections');
 const { ObjectId } = require("mongodb");
@@ -295,6 +296,94 @@ module.exports={
         console.log(req.body);
        
     
+    },
+    codorderplacedsuccess:(req,res)=>{
+       try {
+        let user=req.session.user
+        if(user){
+            customer=true
+            res.render("user/placeorder",{user:true, customer,user})
+           
+        }
+        
+       } catch (error) {
+        res.render('user/404')
+        
+       }
+       
+        
+    },
+    orderlist:async(req,res)=>{
+        try {
+            let user=req.session.user
+            // res.render("user/orderlist",{user:true, customer,user})
+            let orders= await orderHelper.getuserorders(req.session.user._id)
+           
+            if(user){
+                customer=true
+                res.render("user/orderlist",{user:true, customer,user,orders})
+               
+            }
+
+            
+        } catch (error) {
+            res.render('user/404')
+            
+        }
+
+    },
+    vieworderproduct:async(req,res)=>{
+        try {
+            console.log(req.params.id);
+            let user=req.session.user
+            let products=await orderHelper.getorderproduct(req.params.id)
+            
+            console.log(products);
+            if(user){
+                customer=true
+                res.render('user/view-order-productt',{user:true, customer,user,products})
+               
+               
+            }
+            
+           } catch (error) {
+            res.render('user/404')
+            
+           }
+
+    },
+    aboutus:(req,res)=>{
+      
+            let user=req.session.user
+            if(user){
+                customer=true
+                res.render("user/aboutus",{user:true, customer,user})
+               
+            }else{
+                res.render('user/aboutus',{user:true})
+            }
+            
+          
+
+    },
+    cancelOrder:(req,res)=>{
+        try {
+            const orId=req.params.id
+            // console.log(orId);
+            
+            orderHelper.cancelOrder(orId).then(response)
+            res.redirect('/orderlist')
+
+            
+        } catch (error) {
+            res.render('user/404')
+            
+        }
+        
+           
+        
+       
+
     }
     
        

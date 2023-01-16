@@ -192,8 +192,8 @@ module.exports = {
 
     },
     removecartproduct: (details) => {
-        console.log(details);
-        console.log(details.product);
+        // console.log(details);
+        // console.log(details.product);
         return new Promise((resolve, reject) => {
             db.get().collection(collection.CART_COLLECTION)
                 .updateOne({ _id: ObjectId(details.cart) },
@@ -274,17 +274,17 @@ module.exports = {
     placeOrder:(order,products,total)=>{
         return new Promise((resolve,reject)=>{
 
-            console.log(order,products,total);
+            // console.log(order,products,total);
             let status=order['payment-method']==='COD'?'placed':'pending'
             let orderObj={
                 deliveryDetails:{
                     name:order.name,
-                    address:order.address,
+                    address:order.address, 
                     mobile:order.mobile,
                     place:order.place,
                     pincode:order.pincode,
                     total:total,
-                    date:new Date()
+                    date:new Date().toJSON().slice(0,10)
 
                 },
                 userId:ObjectId(order.userId),

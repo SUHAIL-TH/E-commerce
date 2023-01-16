@@ -5,7 +5,8 @@ const userHelpers = require("../model/helpers/user-helpers");
 const usermanagementHelper=require('../model/helpers/usermanagmentHelper');
 const categoryHelper=require("../model/helpers/category-helper")
 const { response } = require("express");
-const verifyLogin=require('../middlewares/sessions')
+const verifyLogin=require('../middlewares/sessions');
+const orderHelper = require("../model/helpers/orderHelper");
 
 
 module.exports={
@@ -158,9 +159,10 @@ module.exports={
     },
     editproduct:async(req,res)=>{
         let id=req.params.id
+        console.log(id);
         
         let product=await productHelper.getproductdetails(id)
-        console.log(product);
+        // console.log(product);
         res.render("admin/editproduct",{admin:true,product,id})
     },
     
@@ -176,6 +178,68 @@ module.exports={
 
             }
         })
+
+    },
+    orderlist:async(req,res)=>{
+        
+        await orderHelper.allorders().then((orders)=>{
+           
+
+            res.render('admin/orderlist',{orders,admin:true})
+            
+        })
+
+       
+    },
+    cancelorder:async(req,res)=>{
+        try {
+           const ordId=req.params.id
+           await orderHelper.cancelorder(ordId).then((response)=>{
+            res.redirect('/admin/orderlist')
+           })
+
+            
+        } catch (error) {
+            res.render('admin/404')
+            
+        }
+       
+    },
+    updateorderstatus:async(req,res)=>{
+        try {
+            let id=req.params.id 
+            await orderHelper.allorders().then((orders)=>{ 
+                console.log(orders);
+                 res.render('admin/statusupdate',{admin:true,orders,id})
+             
+
+            })
+            
+            
+           
+            
+        } catch (error) {
+            res.render('admin/404')
+            
+        }
+    },
+    postorderstatus:async(req,res)=>{
+        try {
+            
+            console.log(req.params.id);
+            console.log(req.body);
+
+            await orderHelper.updateorderstatus(req.params.id,req.body).then(()=>{
+                  res.redirect('/admin/orderlist')
+            
+
+            })
+          
+            
+        } catch (error) {
+            res.render('admin/404')
+            
+        }
 
     }
  
