@@ -16,6 +16,8 @@ const userRouter=require('./routes/user')
 
 const adminRouter=require('./routes/admin')
 
+// const morgan=require("morgan")
+
 
 const app=express()
 
@@ -37,6 +39,8 @@ app.use(session({
     resave: false 
 
 }));
+
+// app.use(morgan(":method:status"))
 
 app.use(express.static(__dirname));
 
