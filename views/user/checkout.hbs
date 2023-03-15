@@ -74,8 +74,10 @@
                 method:'post',
                 data:$('#checkoutform').serialize(), 
                 success:(response)=>{
+                    //alert(response)
                     if(response.status){
-                        location.href='/orderplacedsuccess'
+                        
+                        location.href='/codorderplacedsuccess'
                     }
                 }
             })

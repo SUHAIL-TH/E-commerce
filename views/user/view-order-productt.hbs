@@ -1,0 +1,49 @@
+<section>
+    <div class="container ">
+        <h2 class="text-success">OREDERED PRODUCT </h2>
+
+        <hr>
+        <a href="/home" class=" btn btn-danger font-weight-bold">Back to home </a>
+        <div class="row">
+            {{#each products}}
+
+
+            <div class=" col-md-4 pb-1 mt-2">
+                <div class="product-item bg-light mb-4">
+                    <div class="product-img position-relative overflow-hidden">
+                        <img class="img-fluid w-100" style="width:50px; height: 315px;" src="/public/img/product-images/{{this.product._id}}.jpg" alt="product image">
+                        
+                    </div>
+                    <div class="text-center py-4">
+                        <a class=" text-decoration-none text-truncate font-weight-bold" href=""><h5><i>{{this.product.product_name}}</i></h5></a>
+                        <div class="d-flex align-items-center justify-content-center mt-2">
+                            <h5>₹{{this.product.Rate}}</h5>
+                        </div>
+                        <div class="d-flex align-items-center justify-content-center mt-2">
+                            <h6>Quantity:{{this.quantity}}</h6>
+                        </div>
+                        <div class="d-flex align-items-center justify-content-center mt-2">
+                            <h6>{{this.product.Category}}</h6>
+                        </div>
+{{!--                         
+                        <div class="d-flex align-items-center justify-content-center mb-1">
+                                <small class="fa fa-star text-primary mr-1"></small>
+                            <small class="fa fa-star text-primary mr-1"></small>
+                            <small class="fa fa-star text-primary mr-1"></small>
+                            <small class="fa fa-star text-primary mr-1"></small>
+                            <small class="fa fa-star-half-alt text-primary mr-1"></small>
+                            <small>(4.3)</small>
+                        </div> --}}
+                    </div>
+                </div>
+            </div>
+            {{/each}}
+
+        </div>
+        
+           
+
+            
+
+    </div>
+</section>

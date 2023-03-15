@@ -1,4 +1,4 @@
-<body >
+ <body >
     <div class="container ">
 <div class="row  ">
  
@@ -27,13 +27,11 @@
       <td>{{this.deliveryDetails.total}}</td>
       <td>{{this.paymentMethode}}</td>
       <td>{{this.status}}</td>
-     
+      
        <td>
         {{!-- <a href="/admin/editproduct/{{this._id}}" class="btn btn-info font-weight-bold">Edit</a> --}}
-        <a href="/view-order-product/{{this._id}}" class="btn btn-success font-weight-bold" >View</a>
-        {{!-- {{#if this.status!='delivered'}} --}}
-        <a href="/cancelorder/{{this._id}}" class="btn btn-danger " onclick="return confirm('DO you want to cancel the order?')">cancel</a>
-       {{!-- {{/if}} --}}
+        <a href="/admin/updateorder/{{this._id}}" class="btn btn-success font-weight-bold" >Edit</a>
+        <a href="/admin/CancelOrder/{{this._id}}" class="btn btn-danger font-weight-bold" onclick="return confirm('do you want to cancel the order')" >cancel</a>
         </td>
     
     </tr>

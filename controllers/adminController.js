@@ -236,7 +236,7 @@ module.exports={
             })
           
             
-        } catch (error) {
+        } catch (error) { 
             res.render('admin/404')
             
         }
