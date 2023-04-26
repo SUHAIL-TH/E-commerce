@@ -42,7 +42,7 @@ module.exports = {
                 }
 
 
-            } else {
+            } else { 
                 let cartObj = {
                     user: ObjectId(userId),
                     products: [proObj]
