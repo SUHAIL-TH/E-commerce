@@ -16,7 +16,7 @@ const userRouter=require('./routes/user')
 
 const adminRouter=require('./routes/admin')
 
-// const morgan=require("morgan")
+ const morgan=require("morgan")
 
 
 const app=express()
