@@ -162,7 +162,7 @@ module.exports={
         console.log(id);
         
         let product=await productHelper.getproductdetails(id)
-        // console.log(product);
+    
         res.render("admin/editproduct",{admin:true,product,id})
     },
     
