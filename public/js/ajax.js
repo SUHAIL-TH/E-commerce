@@ -58,10 +58,10 @@ function removeProduct(cartId,proId) {
         method: 'post',
         success: (response) => {
             if (response.removeProduct) {
-                alert('product removed from cart')
+                alert('product has removed from cart')
                 location.reload()
             }
-        }
+        } 
     })
 }
 
